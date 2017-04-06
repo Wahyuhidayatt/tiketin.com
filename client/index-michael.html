@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="homepage">
+      <input type="text" name="" v-model="flightSearch.d">
+      <input type="text" name="" v-model="flightSearch.a">
+      <input type="text" name="" v-model="flightSearch.date">
+      <input type="text" name="" v-model="flightSearch.adult">
+      <input type="text" name="" v-model="flightSearch.child">
+      <button type="button" name="button" @click="getFlightData">Cari</button>
+
+      <table>
+        <thead>
+          <th>
+            <td>airlines</td>
+            <td>airlinesname</td>
+            <td>depart</td>
+            <td>arrival</td>
+            <td>transit</td>
+            <td>fasilitas</td>
+            <td>price</td>
+          </th>
+        </thead>
+        <tbody>
+          <tr v-for="flight in flightList">
+            <td>{{ flight.airlines }}</td>
+            <td>{{ flight.airlinesname }}</td>
+            <td>{{ flight.depart }}</td>
+            <td>{{ flight.arrival }}</td>
+            <td>{{ flight.stoptext }}</td>
+            <td>{{ flight.baggage }}</td>
+            <td>{{ flight.price }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script src="assets/js/bundle.js" charset="utf-8"></script>
+  </body>
+</html>
