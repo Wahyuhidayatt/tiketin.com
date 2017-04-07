@@ -2,30 +2,310 @@
 const Scrapper = require('./cheerio')
 var scrapper = new Scrapper
 
-var homepage = new Vue({
-  el: '#homepage',
+$('#ticketSearch').css('display', '');
+
+var searchpage = new Vue({
+  el: '#searchpage',
   data: {
-    city: [],
+    cityFull: {
+      'MNA': 'Sulawesi Utara (MNA), Melanguane',
+      'TXE': 'Aceh (TXE), Takengon Rembele',
+      'ARD': 'Alor Island (ARD), Mali',
+      'AMQ': 'Ambon (AMQ), Pattimura',
+      'VPM': 'Ampana (VPM), Tanjung Api',
+      'ABU': 'Atambua (ABU), Haliwen',
+      'BJW': 'Bajawa (BJW), Soa',
+      'BPN': 'Balikpapan (BPN), Sepinggan',
+      'SBG': 'Banda Aceh (SBG), Sabang',
+      'BTJ': 'Banda Aceh (BTJ), Sultan Iskandar Muda',
+      'BDO': 'Bandung (BDO), Husein Sastranegara',
+      'BDJ': 'Banjarmasin (BDJ), Syamsuddin Noor',
+      'BWX': 'Banyuwangi (BWX), Blimbingsari',
+      'MTW': 'Barito Utara (MTW), Beringin',
+      'BTH': 'Batam (BTH), Hang Nadim',
+      'BTW': 'Batu Licin (BTW), Batu Licin',
+      'BUW': 'Baubau (BUW), Baubau',
+      'BKS': 'Bengkulu (BKS), Fatmawati Soekarno',
+      'BEJ': 'Berau (BEJ), Kalimarau',
+      'BIK': 'Biak (BIK), Frans Kaisiepo',
+      'BMU': 'Bima (BMU), Muhammad Salahuddin',
+      'WUB': 'Buli (WUB), Buli',
+      'MRB': 'Bungo (MRB), Muara Bungo',
+      'UOL': 'Buol (UOL), Pogugol',
+      'DEX': 'Dekai (DEX), Nop Goliat',
+      'DPS': 'Denpasar, Bali (DPS), Ngurah Rai',
+      'DUM': 'Dumai, Riau (DUM), Pinang Kampai',
+      'ENE': 'Ende (ENE), H. Hasan Aroeboesman',
+      'FKQ': 'Fakfak (FKQ), Fakfak',
+      'LKA': 'Flores Timur (LKA), Gewayantana',
+      'GTO': 'Gorontalo (GTO), Jalaluddin',
+      'GNS': 'Gunungsitoli (GNS), Gunung Sitoli, Binaka',
+      'GLX': 'Halmahera Utara (GLX), Gamarmalamo',
+      'JKT': 'Jakarta (Semua Bandara) (JKT), Jakarta',
+      'CGK': 'Jakarta - Cengkareng (CGK), Soekarno Hatta',
+      'HLP': 'Jakarta - Halim (HLP), Halim Perdanakusuma',
+      'DJB': 'Jambi (DJB), Sultan Thaha Syaifuddin',
+      'DJJ': 'Jayapura (DJJ), Sentani',
+      'WMX': 'Jayawijaya (WMX), Wamena',
+      'JBB': 'Jember (JBB), Notohadinegoro',
+      'LLO': 'Kabupaten Luwu, Sulawesi Selatan (LLO), Palopo Lagaligo',
+      'KNG': 'Kaimana (KNG), Kaimana, Utarom',
+      'PSU': 'Kapuas Hulu (PSU), Putussibau',
+      'KDI': 'Kendari (KDI), Haluoleo',
+      'DOB': 'Kepulauan Aru (DOB), Dobo',
+      'KTG': 'Ketapang (KTG), Rahadi Oesman',
+      'KBU': 'Kotabaru (KBU), Kotabaru',
+      'PKN': 'Kotawaringin Barat (PKN), Pangkalan Bun',
+      'KOE': 'Kupang (KOE), El Tari',
+      'MLK': 'Kutai Barat (MLK), Melalan',
+      'LBJ': 'Labuanbajo (LBJ), Labuanbajo, Komodo',
+      'LAH': 'Labuha (LAH), Labuha, Oesman Sadik',
+      'TKG': 'Lampung (TKG), Radin Inten II',
+      'LSW': 'Lhokseumawe (LSW), Lhokseumawe, Malikussaleh',
+      'LOP': 'Lombok, Mataram (LOP), Lombok',
+      'LLG': 'Lubuklinggau (LLG), Silampari',
+      'LUW': 'Luwuk (LUW), Syukuran Aminuddin Amir',
+      'MLG': 'Malang (MLG), Abdul Rachman Saleh',
+      'MLN': 'Malinau (MLN), Robert Atty Bessing',
+      'SXK': 'Maluku Tenggara Barat (SXK), Olilit',
+      'MJU': 'Mamuju (MJU), Mamuju',
+      'MDC': 'Manado (MDC), Sam Ratulangi',
+      'MKW': 'Manokwari (MKW), Rendani',
+      'MOF': 'Maumere (MOF), Wai Oti',
+      'KNO': 'Medan - Kuala Namu (KNO), Kuala Namu',
+      'MKQ': 'Merauke (MKQ), Mopah',
+      'MEQ': 'Meulaboh (MEQ), Meulaboh, Cut Nyak Dien',
+      'MBE': 'Monbetsu (MBE), Monbetsu',
+      'NBX': 'Nabire (NBX), Nabire',
+      'NTX': 'Natuna (NTX), Ranai',
+      'NNX': 'Nunukan (NNX), Nunukan',
+      'OBO': 'Obihiro (OBO), Tokachi Obihiro',
+      'PDG': 'Padang (PDG), Minangkabau',
+      'MWK': 'Pal Matak, Kepulauan Riau (MWK), Matak',
+      'PKY': 'Palangka Raya (PKY), Tjilik Riwut',
+      'PLM': 'Palembang (PLM), Sultan Mahmud Badaruddin II',
+      'PLW': 'Palu (PLW), Mutiara',
+      'PGK': 'Pangkal Pinang (PGK), Depati Amir',
+      'PKU': 'Pekanbaru (PKU), Sultan Syarif Kasim II',
+      'FLZ': 'Pinangsori Airport (FLZ), Sibolga',
+      'PUM': 'Pomalaa (PUM), Sangia Nibandera Pomalaa',
+      'PNK': 'Pontianak (PNK), Supadio',
+      'PSJ': 'Poso (PSJ), Poso, Kasiguncu',
+      'CFE': 'Prancis (CFE), Clermont-Ferrand Auvergne',
+      'OTI': 'Pulau Morotai (OTI), Morotai',
+      'RJM': 'Raja Ampat (RJM), Marinda',
+      'RTI': 'Rote Ndao (RTI), Lekunik',
+      'RTG': 'Ruteng (RTG), Frans Sales Lega',
+      'SRI': 'Samarinda (SRI), Temindung',
+      'SMQ': 'Sampit (SMQ), H. Asan Sampit',
+      'YKR': 'Selayar (YKR), Selayar',
+      'SRG': 'Semarang (SRG), Achmad Yani',
+      'DTB': 'Silangit (DTB), Silangit',
+      'SMG': 'Simeuleu (SMG), Simeuleu',
+      'SQG': 'Sintang (SQG), Susilo',
+      'SOC': 'Solo (SOC), Adisumarmo',
+      'SOQ': 'Sorong (SOQ), Dominique Edward Osok',
+      'SWQ': 'Sumbawa (SWQ), Sumbawa, Brang Biji',
+      'SUB': 'Surabaya (SUB), Juanda',
+      'TJG': 'Tabalong (TJG), Warukin',
+      'NAH': 'Tahuna (NAH), Naha',
+      'TMC': 'Tambolaka (TMC), Tampolaka',
+      'TJQ': 'Tanjung Pandan,belitung (TJQ), H.a.s Hanandjoeddin',
+      'TNJ': 'Tanjung Pinang (TNJ), Raja Haji Fisabilillah',
+      'TJS': 'Tanjung Selor (TJS), Tanjung Harapan',
+      'AEG': 'Tapanuli Selatan-Aek Godang (AEG), Aek Godang',
+      'TRK': 'Tarakan (TRK), Juwata',
+      'TTE': 'Ternate (TTE), Sultan Babullah',
+      'TIM': 'Timika (TIM), Mozes Kilangin',
+      'KAZ': 'Tobelo (KAZ), Tobelo',
+      'TLI': 'Toli-Toli (TLI), Toli Toli',
+      'LUV': 'Tual (LUV), Dumatubun',
+      'UPG': 'Ujungpandang, Makassar (UPG), Sultan Hasanuddin',
+      'WGP': 'Waingapu (WGP), Waingapu',
+      'WNI': 'Wakatobi (WNI), Matahora',
+      'WGI': 'Wangi Wangi (WGI), Wangi Wangi, Matahora',
+      'JOG': 'Yogyakarta (JOG), Adi Sutjipto'
+    },
+    cityShort: {
+      'MNA': 'Sulawesi Utara (MNA)',
+      'TXE': 'Aceh (TXE)',
+      'ARD': 'Alor Island (ARD)',
+      'AMQ': 'Ambon (AMQ)',
+      'VPM': 'Ampana (VPM)',
+      'ABU': 'Atambua (ABU)',
+      'BJW': 'Bajawa (BJW)',
+      'BPN': 'Balikpapan (BPN)',
+      'SBG': 'Banda Aceh (SBG)',
+      'BTJ': 'Banda Aceh (BTJ)',
+      'BDO': 'Bandung (BDO)',
+      'BDJ': 'Banjarmasin (BDJ)',
+      'BWX': 'Banyuwangi (BWX)',
+      'MTW': 'Barito Utara (MTW)',
+      'BTH': 'Batam (BTH)',
+      'BTW': 'Batu Licin (BTW)',
+      'BUW': 'Baubau (BUW)',
+      'BKS': 'Bengkulu (BKS)',
+      'BEJ': 'Berau (BEJ)',
+      'BIK': 'Biak (BIK)',
+      'BMU': 'Bima (BMU)',
+      'WUB': 'Buli (WUB),',
+      'MRB': 'Bungo (MRB) ',
+      'UOL': 'Buol (UOL), ',
+      'DEX': 'Dekai (DEX),',
+      'DPS': 'Denpasar (DPS)',
+      'DUM': 'Dumai, Riau (DUM)',
+      'ENE': 'Ende (ENE)',
+      'FKQ': 'Fakfak (FKQ)',
+      'LKA': 'Flores Timur (LKA)',
+      'GTO': 'Gorontalo (GTO)',
+      'GNS': 'Gunungsitoli (GNS)',
+      'GLX': 'Halmahera Utara (GLX)',
+      'JKT': 'Jakarta (JKT)',
+      'CGK': 'Jakarta (CGK)',
+      'HLP': 'Jakarta (HLP)',
+      'DJB': 'Jambi (DJB)',
+      'DJJ': 'Jayapura (DJJ)',
+      'WMX': 'Jayawijaya (WMX)',
+      'JBB': 'Jember (JBB)',
+      'LLO': 'Kabupaten Luwu (LLO)',
+      'KNG': 'Kaimana (KNG)',
+      'PSU': 'Kapuas Hulu (PSU)',
+      'KDI': 'Kendari (KDI)',
+      'DOB': 'Kepulauan Aru (DOB)',
+      'KTG': 'Ketapang (KTG)',
+      'KBU': 'Kotabaru (KBU)',
+      'PKN': 'Kotawaringin Barat (PKN)',
+      'KOE': 'Kupang (KOE)',
+      'MLK': 'Kutai Barat (MLK)',
+      'LBJ': 'Labuanbajo (LBJ)',
+      'LAH': 'Labuha (LAH)',
+      'TKG': 'Lampung (TKG)',
+      'LSW': 'Lhokseumawe (LSW)',
+      'LOP': 'Lombok (LOP)',
+      'LLG': 'Lubuklinggau (LLG)',
+      'LUW': 'Luwuk (LUW)',
+      'MLG': 'Malang (MLG)',
+      'MLN': 'Malinau (MLN)',
+      'SXK': 'Maluku Tenggara Barat (SXK)',
+      'MJU': 'Mamuju (MJU)',
+      'MDC': 'Manado (MDC)',
+      'MKW': 'Manokwari (MKW)',
+      'MOF': 'Maumere (MOF)',
+      'KNO': 'Kuala Namu (KNO)',
+      'MKQ': 'Merauke (MKQ)',
+      'MEQ': 'Meulaboh (MEQ)',
+      'MBE': 'Monbetsu (MBE)',
+      'NBX': 'Nabire (NBX)',
+      'NTX': 'Natuna (NTX)',
+      'NNX': 'Nunukan (NNX)',
+      'OBO': 'Obihiro (OBO)',
+      'PDG': 'Padang (PDG)',
+      'MWK': 'Pal Matak (MWK)',
+      'PKY': 'Palangka Raya (PKY)',
+      'PLM': 'Palembang (PLM)',
+      'PLW': 'Palu (PLW)',
+      'PGK': 'Pangkal Pinang (PGK)',
+      'PKU': 'Pekanbaru (PKU)',
+      'FLZ': 'Pinangsori Airport (FLZ)',
+      'PUM': 'Pomalaa (PUM)',
+      'PNK': 'Pontianak (PNK)',
+      'PSJ': 'Poso (PSJ)',
+      'CFE': 'Prancis (CFE)',
+      'OTI': 'Pulau Morotai (OTI)',
+      'RJM': 'Raja Ampat (RJM)',
+      'RTI': 'Rote Ndao (RTI)',
+      'RTG': 'Ruteng (RTG)',
+      'SRI': 'Samarinda (SRI)',
+      'SMQ': 'Sampit (SMQ)',
+      'YKR': 'Selayar (YKR)',
+      'SRG': 'Semarang (SRG)',
+      'DTB': 'Silangit (DTB)',
+      'SMG': 'Simeuleu (SMG)',
+      'SQG': 'Sintang (SQG)',
+      'SOC': 'Solo (SOC)',
+      'SOQ': 'Sorong (SOQ)',
+      'SWQ': 'Sumbawa (SWQ)',
+      'SUB': 'Surabaya (SUB)',
+      'TJG': 'Tabalong (TJG)',
+      'NAH': 'Tahuna (NAH)',
+      'TMC': 'Tambolaka (TMC)',
+      'TJQ': 'Tanjung Pandan,belitung (TJQ)',
+      'TNJ': 'Tanjung Pinang (TNJ)',
+      'TJS': 'Tanjung Selor (TJS)',
+      'AEG': 'Tapanuli Selatan-Aek Godang (AEG)',
+      'TRK': 'Tarakan (TRK)',
+      'TTE': 'Ternate (TTE)',
+      'TIM': 'Timika (TIM)',
+      'KAZ': 'Tobelo (KAZ)',
+      'TLI': 'Toli-Toli (TLI)',
+      'LUV': 'Tual (LUV)',
+      'UPG': 'Ujungpandang (UPG)',
+      'WGP': 'Waingapu (WGP)',
+      'WNI': 'Wakatobi (WNI)',
+      'WGI': 'Wangi Wangi (WGI)',
+      'JOG': 'Yogyakarta (JOG)'
+    },
+    cart: {
+      pesawat: [],
+      kereta_api: []
+    },
     flightSearch: {
       d: 'JKT',
       a: 'DPS',
-      date: '2017-04-12',
+      date: '',
       adult: '1',
       child: '1'
     },
-    flightList: []
+    flightList: [],
+    trainSearch: {
+      d: 'GMR',
+      a: 'BD',
+      date: '2017-04-07',
+      adult: '1'
+    },
+    trainList: []
   },
+  computed: {
+    nowDayDate: function() {
+      let monthNames = [
+        "Jan", "Feb", "Mar",
+        "Apr", "Mei", "Jun", "Jul",
+        "Agust", "Sep", "Okt",
+        "Nov", "Des"
+      ]
+      let dayNames = [
+        "Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"
+      ]
+      let date = new Date
+      let dayIndex = date.getDay()
+      let day = date.getDate()
+      let monthIndex = date.getMonth()
+      let year = date.getFullYear()
+      return dayNames[dayIndex] + ', ' + day + ' ' + monthNames[monthIndex] + ' ' + year
+    },
+
+    nowYYMMDD: function() {
+      let date = new Date
+      let yyyy = date.getFullYear()
+      let mm = ('0' + (date.getMonth()+1)).slice(-2)
+      let dd = ('0' + (date.getDate())).slice(-2)
+      return `${yyyy}-${mm}-${dd}`
+    }
+
+  },
+
   methods: {
-    getCity: function() {
-      let url = 'https://www.tiket.com/pesawat'
-      scrapper.fetch(url, function() {
-        console.log(scrapper.$('.cl1').find('.jstarget-all-airport')
-          .children()
-          // .each(function() {
-          //   console.log(this)
-          // })
-        )
-      })
+    nowHHNN: function(number) {
+      let date = new Date(Number(number + '000'))
+      let hours = ('0' + date.getHours()).slice(-2)
+      let minutes = ('0' + date.getMinutes()).slice(-2)
+      return `${hours}:${minutes}`
+    },
+
+    toCurrency: function(number) {
+      if (typeof number == 'number')
+        return 'Rp ' + number.toFixed(0).replace(/(\d)(?=(\d{3})+$)/g, '$1.')
+      return number
     },
 
     getFlightData: function() {
@@ -43,8 +323,14 @@ var homepage = new Vue({
         scrapper.$('#tbody_depart')
           .children('tr')
           .each(function() {
-            if(this.attribs['data-airlines'] !== undefined)
+            if(this.attribs['data-airlines'] !== undefined) {
+              let citytext = scrapper.$(this).attr('class').match(/flight-rows-depart-(\w+)/)[1]
+              let cityd = citytext.substr(0, 3)
+              let citya = citytext.substr(3, 3)
               self.flightList.push({
+                img: scrapper.$(this).find('.td1 img').attr('src'),
+                cityd: cityd,
+                citya: citya,
                 airlines: this.attribs['data-airlines'],
                 airlinesname: this.attribs['data-airlinesname'],
                 flightid: this.attribs['data-flightid'],
@@ -52,19 +338,94 @@ var homepage = new Vue({
                 arrival: this.attribs['data-arrival'],
                 stoptext: this.attribs['data-stoptext'],
                 baggage: this.attribs['data-baggage'],
-                price: this.attribs['data-price']
+                price: this.attribs['data-price'],
+                adult: self.flightSearch.adult,
+                child: self.flightSearch.child,
+                quantity: Number(self.flightSearch.adult) + Number(self.flightSearch.child)
               })
+            }
           })
-          console.log(self.flightList)
+          // console.log(self.flightList)
       })
     },
+
     sortFlightData: function(by, order) {
 
+    },
+
+    getTrainData: function() {
+      let self = this
+      self.trainList = []
+      let url = 'https://www.tiket.com/kereta-api/cari?' +
+        'd=' + self.trainSearch.d +
+        '&a=' + self.trainSearch.a +
+        '&date=' + self.trainSearch.date +
+        '&adult=' + self.trainSearch.adult +
+        '&infant=0'
+
+      scrapper.fetch(url, function() {
+        scrapper.$('#tbody_depart')
+          .children('tr.item-list')
+          .each(function() {
+            if(this.attribs['data-name'] !== undefined)
+              self.trainList.push({
+                name: this.attribs['data-name'],
+                depart: this.attribs['data-depart'],
+                arrival: this.attribs['data-arrival'],
+                duration: this.attribs['data-duration'],
+                price: this.attribs['data-price'],
+                classLang: this.attribs['data-class_lang']
+              })
+          })
+          // console.log(self.trainList)
+      })
+    },
+
+    showDatePicker: function() {
+      $("#datepicker").datepicker({ dateFormat: 'yy-mm-dd' })
+    },
+
+    showCart: function() {
+      $('#ticketCart').addClass('is-active')
+    },
+
+    closeCart: function() {
+      $('#ticketCart').removeClass('is-active')
+    },
+
+    addToCart: function(object, type) {
+      let self = this
+      let index = self.cart[type].findIndex(val => {
+        return val.flightid == object.flightid
+      })
+      if (index == -1) {
+        self.cart[type].push(object)
+        localStorage.setItem("cart", JSON.stringify(self.cart[type]))
+        swal("Tiket sudah dimasukkan ke dalam Cart", "Silahkan melakukan checkout atau berbelanja tiket lainnya", "success")
+      } else {
+        swal("Anda sudah memesan tiket ini", "Anda tidak diperbolehkan memesan tiket yang sama :)")
+      }
+    },
+
+    computeTotal: function() {
+      var storedCart = JSON.parse(localStorage.getItem("cart"))
+      if (storedCart.length) {
+        let grandTotal = 0
+        storedCart.forEach(val => {
+          grandTotal += (Number(val.adult)+Number(val.child))*val.price
+        })
+        return grandTotal
+      }
+      return 0
+    },
+
+    checkout: function() {
+      // var storedNames = JSON.parse(localStorage.getItem("cart"))
     }
 
   },
   mounted: function() {
-    this.getCity()
+    this.flightSearch.date = this.nowYYMMDD
   }
 })
 },{"./cheerio":2}],2:[function(require,module,exports){
@@ -102,6 +463,7 @@ class Cheerio {
       res.on('data', chunk => data += chunk)
       res.on('end', () => {
         this._$ = cheerio.load(data)
+        console.log('Done')
         cb()
       })
 

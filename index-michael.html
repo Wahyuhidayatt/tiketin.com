@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="assets/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/dist/sweetalert.css">
+    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  </head>
+  <body>
+    <div id="searchpage">
+
+      <section class="hero is-info is-medium is-bold">
+        <!-- Hero header: will stick at the top -->
+        <div class="hero-head">
+
+          <header class="nav">
+            <div class="container">
+              <div class="nav-left">
+                <a class="nav-item">
+                  <img src="http://bulma.io/images/bulma-type-white.png" alt="Logo">
+                </a>
+              </div>
+              <span class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+              <div class="nav-right nav-menu">
+                <a class="nav-item is-active">
+                  Home
+                </a>
+                <span class="nav-item">
+                  <a class="button is-info is-inverted" @click="showCart">
+                    <span class="icon">
+                      <i class="fa fa-shopping-cart"></i>
+                    </span>
+                    <span>Ticket Cart</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </header>
+        </div>
+
+        <!-- Hero content: will be in the middle -->
+        <div class="hero-body">
+          <div class="container has-text-centered">
+            <h1 class="title">
+              Pencarian Tiket Pesawat
+            </h1>
+          </div>
+
+          <br>
+
+          <nav class="level" style="margin-bottom: 8px;">
+            <div class="level-item">
+              <p class="control" style="width: 260px;">
+                <strong>Keberangkatan</strong>
+              </p>
+              <p class="control" style="width: 260px;">
+                <strong>Kedatangan</strong>
+              </p>
+              <p class="control" style="width: 180px;">
+                <strong>Tanggal</strong>
+              </p>
+              <p class="control" style="width: 120px;">
+                <strong>Dewasa</strong>
+              </p>
+              <p class="control" style="width: 120px;">
+                <strong>Anak</strong>
+              </p>
+              <p class="control" style="width: 90px;">
+
+              </p>
+            </div>
+          </nav>
+
+          <nav class="level">
+            <div class="level-item">
+
+              <div class="field has-addons has-addons-centered">
+
+                <!-- NOTE: d -->
+                <p class="control">
+                  <span class="select">
+                    <select v-model="flightSearch.d" style="width: 260px;">
+                      <option value="TXE">Aceh (TXE), Takengon Rembele</option>
+                      <option value="ARD">Alor Island (ARD), Mali</option>
+                      <option value="AMQ">Ambon (AMQ), Pattimura</option>
+                      <option value="VPM">Ampana (VPM), Tanjung Api</option>
+                      <option value="ABU">Atambua (ABU), Haliwen</option>
+                      <option value="BJW">Bajawa (BJW), Soa</option>
+                      <option value="BPN">Balikpapan (BPN), Sepinggan</option>
+                      <option value="SBG">Banda Aceh (SBG), Sabang</option>
+                      <option value="BTJ">Banda Aceh (BTJ), Sultan Iskandar Muda</option>
+                      <option value="BDO">Bandung (BDO), Husein Sastranegara</option>
+                      <option value="BDJ">Banjarmasin (BDJ), Syamsuddin Noor</option>
+                      <option value="BWX">Banyuwangi (BWX), Blimbingsari</option>
+                      <option value="MTW">Barito Utara (MTW), Beringin</option>
+                      <option value="BTH">Batam (BTH), Hang Nadim</option>
+                      <option value="BTW">Batu Licin (BTW), Batu Licin</option>
+                      <option value="BUW">Baubau (BUW), Baubau</option>
+                      <option value="BKS">Bengkulu (BKS), Fatmawati Soekarno</option>
+                      <option value="BEJ">Berau (BEJ), Kalimarau</option>
+                      <option value="BIK">Biak (BIK), Frans Kaisiepo</option>
+                      <option value="BMU">Bima (BMU), Muhammad Salahuddin</option>
+                      <option value="WUB">Buli (WUB), Buli</option>
+                      <option value="MRB">Bungo (MRB), Muara Bungo</option>
+                      <option value="UOL">Buol (UOL), Pogugol</option>
+                      <option value="DEX">Dekai (DEX), Nop Goliat</option>
+                      <option value="DPS">Denpasar, Bali (DPS), Ngurah Rai</option>
+                      <option value="DUM">Dumai, Riau (DUM), Pinang Kampai</option>
+                      <option value="ENE">Ende (ENE), H. Hasan Aroeboesman</option>
+                      <option value="FKQ">Fakfak (FKQ), Fakfak</option>
+                      <option value="LKA">Flores Timur (LKA), Gewayantana</option>
+                      <option value="GTO">Gorontalo (GTO), Jalaluddin</option>
+                      <option value="GNS">Gunungsitoli (GNS), Gunung Sitoli, Binaka</option>
+                      <option value="GLX">Halmahera Utara (GLX), Gamarmalamo</option>
+                      <option value="JKT">Jakarta (Semua Bandara) (JKT), Jakarta</option>
+                      <option value="CGK">Jakarta - Cengkareng (CGK), Soekarno Hatta</option>
+                      <option value="HLP">Jakarta - Halim (HLP), Halim Perdanakusuma</option>
+                      <option value="DJB">Jambi (DJB), Sultan Thaha Syaifuddin</option>
+                      <option value="DJJ">Jayapura (DJJ), Sentani</option>
+                      <option value="WMX">Jayawijaya (WMX), Wamena</option>
+                      <option value="JBB">Jember (JBB), Notohadinegoro</option>
+                      <option value="LLO">Kabupaten Luwu, Sulawesi Selatan (LLO), Palopo Lagaligo</option>
+                      <option value="KNG">Kaimana (KNG), Kaimana, Utarom</option>
+                      <option value="PSU">Kapuas Hulu (PSU), Putussibau</option>
+                      <option value="KDI">Kendari (KDI), Haluoleo</option>
+                      <option value="DOB">Kepulauan Aru (DOB), Dobo</option>
+                      <option value="KTG">Ketapang (KTG), Rahadi Oesman</option>
+                      <option value="KBU">Kotabaru (KBU), Kotabaru</option>
+                      <option value="PKN">Kotawaringin Barat (PKN), Pangkalan Bun</option>
+                      <option value="KOE">Kupang (KOE), El Tari</option>
+                      <option value="MLK">Kutai Barat (MLK), Melalan</option>
+                      <option value="LBJ">Labuanbajo (LBJ), Labuanbajo, Komodo</option>
+                      <option value="LAH">Labuha (LAH), Labuha, Oesman Sadik</option>
+                      <option value="TKG">Lampung (TKG), Radin Inten II</option>
+                      <option value="LSW">Lhokseumawe (LSW), Lhokseumawe, Malikussaleh</option>
+                      <option value="LOP">Lombok, Mataram (LOP), Lombok</option>
+                      <option value="LLG">Lubuklinggau (LLG), Silampari</option>
+                      <option value="LUW">Luwuk (LUW), Syukuran Aminuddin Amir</option>
+                      <option value="MLG">Malang (MLG), Abdul Rachman Saleh</option>
+                      <option value="MLN">Malinau (MLN), Robert Atty Bessing</option>
+                      <option value="SXK">Maluku Tenggara Barat (SXK), Olilit</option>
+                      <option value="MJU">Mamuju (MJU), Mamuju</option>
+                      <option value="MDC">Manado (MDC), Sam Ratulangi</option>
+                      <option value="MKW">Manokwari (MKW), Rendani</option>
+                      <option value="MOF">Maumere (MOF), Wai Oti</option>
+                      <option value="KNO">Medan - Kuala Namu (KNO), Kuala Namu</option>
+                      <option value="MKQ">Merauke (MKQ), Mopah</option>
+                      <option value="MEQ">Meulaboh (MEQ), Meulaboh, Cut Nyak Dien</option>
+                      <option value="MBE">Monbetsu (MBE), Monbetsu</option>
+                      <option value="NBX">Nabire (NBX), Nabire</option>
+                      <option value="NTX">Natuna (NTX), Ranai</option>
+                      <option value="NNX">Nunukan (NNX), Nunukan</option>
+                      <option value="OBO">Obihiro (OBO), Tokachi Obihiro</option>
+                      <option value="PDG">Padang (PDG), Minangkabau</option>
+                      <option value="MWK">Pal Matak, Kepulauan Riau (MWK), Matak</option>
+                      <option value="PKY">Palangka Raya (PKY), Tjilik Riwut</option>
+                      <option value="PLM">Palembang (PLM), Sultan Mahmud Badaruddin II</option>
+                      <option value="PLW">Palu (PLW), Mutiara</option>
+                      <option value="PGK">Pangkal Pinang (PGK), Depati Amir</option>
+                      <option value="PKU">Pekanbaru (PKU), Sultan Syarif Kasim II</option>
+                      <option value="FLZ">Pinangsori Airport (FLZ), Sibolga</option>
+                      <option value="PUM">Pomalaa (PUM), Sangia Nibandera Pomalaa</option>
+                      <option value="PNK">Pontianak (PNK), Supadio</option>
+                      <option value="PSJ">Poso (PSJ), Poso, Kasiguncu</option>
+                      <option value="CFE">Prancis (CFE), Clermont-Ferrand Auvergne</option>
+                      <option value="OTI">Pulau Morotai (OTI), Morotai</option>
+                      <option value="RJM">Raja Ampat (RJM), Marinda</option>
+                      <option value="RTI">Rote Ndao (RTI), Lekunik</option>
+                      <option value="RTG">Ruteng (RTG), Frans Sales Lega</option>
+                      <option value="SRI">Samarinda (SRI), Temindung</option>
+                      <option value="SMQ">Sampit (SMQ), H. Asan Sampit</option>
+                      <option value="YKR">Selayar (YKR), Selayar</option>
+                      <option value="SRG">Semarang (SRG), Achmad Yani</option>
+                      <option value="DTB">Silangit (DTB), Silangit</option>
+                      <option value="SMG">Simeuleu (SMG), Simeuleu</option>
+                      <option value="SQG">Sintang (SQG), Susilo</option>
+                      <option value="SOC">Solo (SOC), Adisumarmo</option>
+                      <option value="SOQ">Sorong (SOQ), Dominique Edward Osok</option>
+                      <option value="MNA">Sulawesi Utara (MNA), Melanguane</option>
+                      <option value="SWQ">Sumbawa (SWQ), Sumbawa, Brang Biji</option>
+                      <option value="SUB">Surabaya (SUB), Juanda</option>
+                      <option value="TJG">Tabalong (TJG), Warukin</option>
+                      <option value="NAH">Tahuna (NAH), Naha</option>
+                      <option value="TMC">Tambolaka (TMC), Tampolaka</option>
+                      <option value="TJQ">Tanjung Pandan,belitung (TJQ), H.a.s Hanandjoeddin</option>
+                      <option value="TNJ">Tanjung Pinang (TNJ), Raja Haji Fisabilillah</option>
+                      <option value="TJS">Tanjung Selor (TJS), Tanjung Harapan</option>
+                      <option value="AEG">Tapanuli Selatan-Aek Godang (AEG), Aek Godang</option>
+                      <option value="TRK">Tarakan (TRK), Juwata</option>
+                      <option value="TTE">Ternate (TTE), Sultan Babullah</option>
+                      <option value="TIM">Timika (TIM), Mozes Kilangin</option>
+                      <option value="KAZ">Tobelo (KAZ), Tobelo</option>
+                      <option value="TLI">Toli-Toli (TLI), Toli Toli</option>
+                      <option value="LUV">Tual (LUV), Dumatubun</option>
+                      <option value="UPG">Ujungpandang, Makassar (UPG), Sultan Hasanuddin</option>
+                      <option value="WGP">Waingapu (WGP), Waingapu</option>
+                      <option value="WNI">Wakatobi (WNI), Matahora</option>
+                      <option value="WGI">Wangi Wangi (WGI), Wangi Wangi, Matahora</option>
+                      <option value="JOG">Yogyakarta (JOG), Adi Sutjipto</option>
+                    </select>
+                  </span>
+                </p>
+
+                <!-- NOTE: a -->
+                <p class="control">
+                  <span class="select">
+                    <select v-model="flightSearch.a" style="width: 260px;">
+                      <option value="TXE">Aceh (TXE), Takengon Rembele</option>
+                      <option value="ARD">Alor Island (ARD), Mali</option>
+                      <option value="AMQ">Ambon (AMQ), Pattimura</option>
+                      <option value="VPM">Ampana (VPM), Tanjung Api</option>
+                      <option value="ABU">Atambua (ABU), Haliwen</option>
+                      <option value="BJW">Bajawa (BJW), Soa</option>
+                      <option value="BPN">Balikpapan (BPN), Sepinggan</option>
+                      <option value="SBG">Banda Aceh (SBG), Sabang</option>
+                      <option value="BTJ">Banda Aceh (BTJ), Sultan Iskandar Muda</option>
+                      <option value="BDO">Bandung (BDO), Husein Sastranegara</option>
+                      <option value="BDJ">Banjarmasin (BDJ), Syamsuddin Noor</option>
+                      <option value="BWX">Banyuwangi (BWX), Blimbingsari</option>
+                      <option value="MTW">Barito Utara (MTW), Beringin</option>
+                      <option value="BTH">Batam (BTH), Hang Nadim</option>
+                      <option value="BTW">Batu Licin (BTW), Batu Licin</option>
+                      <option value="BUW">Baubau (BUW), Baubau</option>
+                      <option value="BKS">Bengkulu (BKS), Fatmawati Soekarno</option>
+                      <option value="BEJ">Berau (BEJ), Kalimarau</option>
+                      <option value="BIK">Biak (BIK), Frans Kaisiepo</option>
+                      <option value="BMU">Bima (BMU), Muhammad Salahuddin</option>
+                      <option value="WUB">Buli (WUB), Buli</option>
+                      <option value="MRB">Bungo (MRB), Muara Bungo</option>
+                      <option value="UOL">Buol (UOL), Pogugol</option>
+                      <option value="DEX">Dekai (DEX), Nop Goliat</option>
+                      <option value="DPS">Denpasar, Bali (DPS), Ngurah Rai</option>
+                      <option value="DUM">Dumai, Riau (DUM), Pinang Kampai</option>
+                      <option value="ENE">Ende (ENE), H. Hasan Aroeboesman</option>
+                      <option value="FKQ">Fakfak (FKQ), Fakfak</option>
+                      <option value="LKA">Flores Timur (LKA), Gewayantana</option>
+                      <option value="GTO">Gorontalo (GTO), Jalaluddin</option>
+                      <option value="GNS">Gunungsitoli (GNS), Gunung Sitoli, Binaka</option>
+                      <option value="GLX">Halmahera Utara (GLX), Gamarmalamo</option>
+                      <option value="JKT">Jakarta (Semua Bandara) (JKT), Jakarta</option>
+                      <option value="CGK">Jakarta - Cengkareng (CGK), Soekarno Hatta</option>
+                      <option value="HLP">Jakarta - Halim (HLP), Halim Perdanakusuma</option>
+                      <option value="DJB">Jambi (DJB), Sultan Thaha Syaifuddin</option>
+                      <option value="DJJ">Jayapura (DJJ), Sentani</option>
+                      <option value="WMX">Jayawijaya (WMX), Wamena</option>
+                      <option value="JBB">Jember (JBB), Notohadinegoro</option>
+                      <option value="LLO">Kabupaten Luwu, Sulawesi Selatan (LLO), Palopo Lagaligo</option>
+                      <option value="KNG">Kaimana (KNG), Kaimana, Utarom</option>
+                      <option value="PSU">Kapuas Hulu (PSU), Putussibau</option>
+                      <option value="KDI">Kendari (KDI), Haluoleo</option>
+                      <option value="DOB">Kepulauan Aru (DOB), Dobo</option>
+                      <option value="KTG">Ketapang (KTG), Rahadi Oesman</option>
+                      <option value="KBU">Kotabaru (KBU), Kotabaru</option>
+                      <option value="PKN">Kotawaringin Barat (PKN), Pangkalan Bun</option>
+                      <option value="KOE">Kupang (KOE), El Tari</option>
+                      <option value="MLK">Kutai Barat (MLK), Melalan</option>
+                      <option value="LBJ">Labuanbajo (LBJ), Labuanbajo, Komodo</option>
+                      <option value="LAH">Labuha (LAH), Labuha, Oesman Sadik</option>
+                      <option value="TKG">Lampung (TKG), Radin Inten II</option>
+                      <option value="LSW">Lhokseumawe (LSW), Lhokseumawe, Malikussaleh</option>
+                      <option value="LOP">Lombok, Mataram (LOP), Lombok</option>
+                      <option value="LLG">Lubuklinggau (LLG), Silampari</option>
+                      <option value="LUW">Luwuk (LUW), Syukuran Aminuddin Amir</option>
+                      <option value="MLG">Malang (MLG), Abdul Rachman Saleh</option>
+                      <option value="MLN">Malinau (MLN), Robert Atty Bessing</option>
+                      <option value="SXK">Maluku Tenggara Barat (SXK), Olilit</option>
+                      <option value="MJU">Mamuju (MJU), Mamuju</option>
+                      <option value="MDC">Manado (MDC), Sam Ratulangi</option>
+                      <option value="MKW">Manokwari (MKW), Rendani</option>
+                      <option value="MOF">Maumere (MOF), Wai Oti</option>
+                      <option value="KNO">Medan - Kuala Namu (KNO), Kuala Namu</option>
+                      <option value="MKQ">Merauke (MKQ), Mopah</option>
+                      <option value="MEQ">Meulaboh (MEQ), Meulaboh, Cut Nyak Dien</option>
+                      <option value="MBE">Monbetsu (MBE), Monbetsu</option>
+                      <option value="NBX">Nabire (NBX), Nabire</option>
+                      <option value="NTX">Natuna (NTX), Ranai</option>
+                      <option value="NNX">Nunukan (NNX), Nunukan</option>
+                      <option value="OBO">Obihiro (OBO), Tokachi Obihiro</option>
+                      <option value="PDG">Padang (PDG), Minangkabau</option>
+                      <option value="MWK">Pal Matak, Kepulauan Riau (MWK), Matak</option>
+                      <option value="PKY">Palangka Raya (PKY), Tjilik Riwut</option>
+                      <option value="PLM">Palembang (PLM), Sultan Mahmud Badaruddin II</option>
+                      <option value="PLW">Palu (PLW), Mutiara</option>
+                      <option value="PGK">Pangkal Pinang (PGK), Depati Amir</option>
+                      <option value="PKU">Pekanbaru (PKU), Sultan Syarif Kasim II</option>
+                      <option value="FLZ">Pinangsori Airport (FLZ), Sibolga</option>
+                      <option value="PUM">Pomalaa (PUM), Sangia Nibandera Pomalaa</option>
+                      <option value="PNK">Pontianak (PNK), Supadio</option>
+                      <option value="PSJ">Poso (PSJ), Poso, Kasiguncu</option>
+                      <option value="CFE">Prancis (CFE), Clermont-Ferrand Auvergne</option>
+                      <option value="OTI">Pulau Morotai (OTI), Morotai</option>
+                      <option value="RJM">Raja Ampat (RJM), Marinda</option>
+                      <option value="RTI">Rote Ndao (RTI), Lekunik</option>
+                      <option value="RTG">Ruteng (RTG), Frans Sales Lega</option>
+                      <option value="SRI">Samarinda (SRI), Temindung</option>
+                      <option value="SMQ">Sampit (SMQ), H. Asan Sampit</option>
+                      <option value="YKR">Selayar (YKR), Selayar</option>
+                      <option value="SRG">Semarang (SRG), Achmad Yani</option>
+                      <option value="DTB">Silangit (DTB), Silangit</option>
+                      <option value="SMG">Simeuleu (SMG), Simeuleu</option>
+                      <option value="SQG">Sintang (SQG), Susilo</option>
+                      <option value="SOC">Solo (SOC), Adisumarmo</option>
+                      <option value="SOQ">Sorong (SOQ), Dominique Edward Osok</option>
+                      <option value="MNA">Sulawesi Utara (MNA), Melanguane</option>
+                      <option value="SWQ">Sumbawa (SWQ), Sumbawa, Brang Biji</option>
+                      <option value="SUB">Surabaya (SUB), Juanda</option>
+                      <option value="TJG">Tabalong (TJG), Warukin</option>
+                      <option value="NAH">Tahuna (NAH), Naha</option>
+                      <option value="TMC">Tambolaka (TMC), Tampolaka</option>
+                      <option value="TJQ">Tanjung Pandan,belitung (TJQ), H.a.s Hanandjoeddin</option>
+                      <option value="TNJ">Tanjung Pinang (TNJ), Raja Haji Fisabilillah</option>
+                      <option value="TJS">Tanjung Selor (TJS), Tanjung Harapan</option>
+                      <option value="AEG">Tapanuli Selatan-Aek Godang (AEG), Aek Godang</option>
+                      <option value="TRK">Tarakan (TRK), Juwata</option>
+                      <option value="TTE">Ternate (TTE), Sultan Babullah</option>
+                      <option value="TIM">Timika (TIM), Mozes Kilangin</option>
+                      <option value="KAZ">Tobelo (KAZ), Tobelo</option>
+                      <option value="TLI">Toli-Toli (TLI), Toli Toli</option>
+                      <option value="LUV">Tual (LUV), Dumatubun</option>
+                      <option value="UPG">Ujungpandang, Makassar (UPG), Sultan Hasanuddin</option>
+                      <option value="WGP">Waingapu (WGP), Waingapu</option>
+                      <option value="WNI">Wakatobi (WNI), Matahora</option>
+                      <option value="WGI">Wangi Wangi (WGI), Wangi Wangi, Matahora</option>
+                      <option value="JOG">Yogyakarta (JOG), Adi Sutjipto</option>
+                    </select>
+                  </span>
+                </p>
+
+                <!-- NOTE: date -->
+                <p class="control">
+                  <input id="datepicker" class="input" type="text" style="width: 180px;" v-model="flightSearch.date" @click="showDatePicker">
+                </p>
+
+                <!-- NOTE: adult children -->
+                <p class="control">
+                  <input class="input" type="number" style="width: 120px;" v-model="flightSearch.adult">
+                </p>
+
+                <p class="control">
+                  <input class="input" type="number" style="width: 120px;" v-model="flightSearch.child">
+                </p>
+
+                <!-- NOTE: search button -->
+                <p class="control">
+                  <button class="button is-danger" style="width: 100px;" @click="getFlightData">
+                    <span class="icon">
+                      <i class="fa fa-search"></i>
+                    </span>
+                    <span>
+                      Search
+                    </span>
+                  </button>
+                </p>
+              </div>
+
+            </div>
+          </nav>
+
+        </div>
+
+        <!-- Hero footer: will stick at the bottom -->
+        <div class="hero-foot">
+          <nav class="tabs">
+            <div class="container">
+              <ul>
+                <li class="is-active"><a>airlines</a></li>
+                <li><a>airlinesname</a></li>
+                <li><a>depart</a></li>
+                <li><a>arrival</a></li>
+                <li><a>transit</a></li>
+                <li><a>fasilitas</a></li>
+                <li><a>price</a></li>
+                <li><a>action</a></li>
+              </ul>
+            </div>
+          </nav>
+
+        </div>
+      </section>
+
+      <section class="section">
+
+        <div id="ticketSearch" class="container" style="display: none;">
+          <div class="box" v-for="flight in flightList">
+            <article class="media">
+              <div class="media-left">
+                <figure class="image is-64x64">
+                  <img v-bind:src="flight.img" alt="Image">
+                </figure>
+              </div>
+              <div class="media-content">
+                <nav class="level">
+                  <div class="level-item">
+                    <div class="">
+                      <p>{{ flight.airlinesname }}</p>
+                      <p style="font-size: 11px;">{{ flight.airlines }}</p>
+                    </div>
+                  </div>
+
+                  <div class="level-item">
+                    <div class="">
+                      <p class=""><strong>{{ flight.depart }}</strong></p>
+                      <p class="">{{ cityShort[flight.cityd] }}</p>
+                    </div>
+                  </div>
+
+                  <div class="level-item">
+                    <div class="">
+                      <p class=""><strong>{{ nowHHNN(flight.arrival) }}</strong></p>
+                      <p class="">{{ cityShort[flight.citya] }}</p>
+                    </div>
+                  </div>
+
+                  <div class="level-item">
+                    <p>{{ flight.stoptext }}</p>
+                  </div>
+
+                  <div class="level-item">
+                    <p>{{ flight.baggage }}</p>
+                  </div>
+
+                  <div class="level-item">
+                    <p><strong>{{ toCurrency(Number(flight.price)) }}</strong></p>
+                  </div>
+
+                </nav>
+              </div>
+
+              <!-- NOTE: order button -->
+              <div class="media-right">
+                <button class="button is-danger" style="margin-top: 10px;" @click="addToCart(flight, 'pesawat')">
+                  <span>
+                    Pesan Sekarang
+                  </span>
+                  <span class="icon">
+                    <i class="fa fa-check"></i>
+                  </span>
+                </button>
+              </div>
+
+            </article>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- NOTE: modal cart -->
+      <div id="ticketCart" class="modal">
+        <div class="modal-background" @click="closeCart"></div>
+
+        <div class="modal-content" style="width: 1000px;height: 500px;background-color: white;">
+
+          <!-- NOTE:  -->
+          <div class="container" style="width: 1000px">
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Tiket yang dipesan</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th>{{ nowDayDate }}</th>
+                </tr>
+              </thead>
+
+              <tfoot>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th>
+                    <button class="button is-danger" @click="">
+                      <span class="icon"><i class="fa fa-money"></i></span>
+                      <span>Checkout</span>
+                    </button>
+                  </th>
+                </tr>
+              </tfoot>
+
+              <tfoot>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th>{{ toCurrency(computeTotal()) }}</th>
+                </tr>
+              </tfoot>
+
+              <tbody>
+                <tr v-for="ticket in cart.pesawat">
+                  <td>
+                    <img v-bind:src="ticket.img" alt="">
+                    {{ ticket.airlines }}
+                  </td>
+                  <td>{{ cityFull[ticket.cityd] }}<br>{{ cityFull[ticket.citya] }}</td>
+                  <td>{{ ticket.depart }}<br>{{ ticket.arrival }}</td>
+                  <td>
+                    Total {{ Number(ticket.adult)+Number(ticket.child) }}
+                    <br>
+                    ( {{ ticket.adult }} Dewasa, {{ ticket.child }} Anak )
+                  </td>
+                  <td>{{ toCurrency(Number(ticket.price) * (Number(ticket.adult)+Number(ticket.child))) }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+
+        <button class="modal-close" @click="closeCart"></button>
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Powered by Bulma</strong>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/js/bundle.js" charset="utf-8"></script>
+  </body>
+</html>
