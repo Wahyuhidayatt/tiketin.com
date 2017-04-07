@@ -1,23 +1,16 @@
 const express = require('express');
-const Transaction = require('../controllers/transactionController')
+const Transaction = require('../models/transaction')
 
 let methods = {}
-  methods.create = (req, res) => {
-    Transaction.create ({
-      // jenis_tiket : req.body.jenis_tiket,
-      // jumlah_tiket : req.body.jumlah_tiket,
-      // jumlah_orang  : req.body.jumlah_orang,
-      // departOrCheckIn : req.body.departOrCheckIn,
-      // arrivalOrCheckOut : req.body.arrivalOrCheckOut
-    })
-    .then(function (err, data) {
-      if(err){
-        res.send(err)
-      }else {
-        res.json(data)
-      }
-    })
-  }
+methods.create = (req, res) => {
+  var transaction = new Transaction(req.body);
+  transaction.save(function (err, createdTodoObject) {
+    if (err) {
+      res.send(err);
+    }
+    res.send(createdTodoObject);
+  });
+}
   methods.getAll = (req, res) => {
     Transaction.find()
     .then( function(err, data) {

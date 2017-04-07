@@ -6,7 +6,9 @@ var passwordHash = require ('password-hash');
 var Strategy = require('passport-local').Strategy;
 var app = express();
 var User = require('./models/user');
+
 var users = require('./routes/users');
+var transactions = require('./routes/transactions');
 
 //config DB
 var db_config = {
@@ -49,6 +51,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.listen(3000)
 
 app.use('/api', users);
+app.use('/api/transaction', transactions);
 
 
 
