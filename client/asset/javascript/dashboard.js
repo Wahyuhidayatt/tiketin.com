@@ -6,7 +6,7 @@ let dashboard = new Vue({
   },
   methods : {
     logout : function(){
-
+      localStorage.clear()
     },
     checkAuth : function(){
       console.log('oke oce');
