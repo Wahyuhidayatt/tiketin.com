@@ -7,6 +7,7 @@
   <title>Tiketin.com</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" id="bulma" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.2/css/bulma.min.css" />
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/vue"></script>
   <link rel="stylesheet" type="text/css" href="/asset/css/sweetalert.css">
 </head>
@@ -51,10 +52,10 @@
               <a class="button is-info" v-on:click='login'>
                 LOGIN
               </a>
-              <a class="button is-warning">
+              <a class="button is-warning button-register" @click='showModalRegister'>
                 REGISTER
               </a>
-               <a class="button is-danger">
+               <a class="button is-danger" @click='forgetAccount'>
                  FORGET
                </a>
             </p>
@@ -63,7 +64,49 @@
         </div>
       </div>
     </div>
+    <div id='modal-register' class="modal is-primary">
+      <div class="modal-background" @click='closeModalRegister'></div>
+      <div class="modal-card is-primary">
+        <header class="modal-card-head">
+          <h1 class="modal-card-title">Register</h1>
+          <button class="delete"></button>
+        </header>
+        <section class="modal-card-body ">
+          <!-- Content ... -->
+          <div class="field">
+            <p class="modal-card-title">Username</p>
+              <p class="control">
+              <input class="input" type="text" placeholder="Username" v-model='register.username'>
+            </p>
+          </div>
+          <div class="field">
+            <p class="modal-card-title">Address</p>
+              <p class="control">
+              <input class="input" type="text" placeholder="address" v-model='register.address'>
+            </p>
+          </div>
+          <div class="field">
+            <p class="modal-card-title">Email</p>
+              <p class="control">
+              <input class="input" type="text" placeholder="email" v-model='register.email'>
+            </p>
+          </div>
+          <div class="field">
+              <p class="modal-card-title">Password</p>
+              <p class="control">
+                <input class="input" type="text" placeholder="password" v-model='register.password'>
+              </p>
+          </div>
+        </section>
+        <footer class="modal-card-foot">
+          <a class="button is-success" @click='registerUser'>Ya, saya ingin bergabung</a>
+          <a class="button is-danger" @click='closeModalRegister'>Mungkin nanti</a>
+        </footer>
+      </div>
+    </div>
 </section>
+<!-- modal login -->
+
     <div class="hero-foot">
       <div class="container">
         <div class="tabs is-centered">

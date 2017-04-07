@@ -30,4 +30,6 @@ router.post('/login',  function(req,res,next){
       })(req,res,next)
 });
 
+router.post('/forget',Controller.forget)
+
 module.exports = router;
