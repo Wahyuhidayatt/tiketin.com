@@ -249,6 +249,7 @@ var searchpage = new Vue({
       pesawat: [],
       kereta_api: []
     },
+    grandTotal: 0,
     flightSearch: {
       d: 'JKT',
       a: 'DPS',
@@ -386,6 +387,8 @@ var searchpage = new Vue({
     },
 
     showCart: function() {
+      let self = this
+      self.computeTotal()
       $('#ticketCart').addClass('is-active')
     },
 
@@ -408,24 +411,30 @@ var searchpage = new Vue({
     },
 
     computeTotal: function() {
-      var storedCart = JSON.parse(localStorage.getItem("cart"))
-      if (storedCart.length) {
-        let grandTotal = 0
-        storedCart.forEach(val => {
-          grandTotal += (Number(val.adult)+Number(val.child))*val.price
-        })
-        return grandTotal
+      let self = this
+      if (localStorage.getItem("cart")) {
+        let storedCart = JSON.parse(localStorage.getItem("cart"))
+        if (storedCart.length) {
+          let grandTotal = 0
+          storedCart.forEach(val => {
+            grandTotal += (Number(val.adult)+Number(val.child))*val.price
+          })
+          self.grandTotal = grandTotal
+        }
+      } else {
+        self.grandTotal = 0
       }
-      return 0
     },
 
     checkout: function() {
-      // var storedNames = JSON.parse(localStorage.getItem("cart"))
+      // let storedCart = JSON.parse(localStorage.getItem("cart"))
     }
 
   },
   mounted: function() {
     this.flightSearch.date = this.nowYYMMDD
+    localStorage.clear()
+    let storedCart = JSON.parse(localStorage.getItem("cart"))
   }
 })
 },{"./cheerio":2}],2:[function(require,module,exports){

@@ -23,7 +23,7 @@
             <div class="container">
               <div class="nav-left">
                 <a class="nav-item">
-                  <img src="http://bulma.io/images/bulma-type-white.png" alt="Logo">
+                  <strong>TIKETIN.com</strong>
                 </a>
               </div>
               <span class="nav-toggle">
@@ -370,18 +370,27 @@
 
         <!-- Hero footer: will stick at the bottom -->
         <div class="hero-foot">
-          <nav class="tabs">
-            <div class="container">
-              <ul>
-                <li class="is-active"><a>airlines</a></li>
-                <li><a>airlinesname</a></li>
-                <li><a>depart</a></li>
-                <li><a>arrival</a></li>
-                <li><a>transit</a></li>
-                <li><a>fasilitas</a></li>
-                <li><a>price</a></li>
-                <li><a>action</a></li>
-              </ul>
+
+          <nav class="level" style="margin-bottom: 8px;">
+            <div class="level-item">
+              <a class="control" style="width: 200px;">
+                <strong>Pesawat</strong>
+              </a>
+              <a class="control" style="width: 150px;">
+                <strong>Pergi</strong>
+              </a>
+              <a class="control" style="width: 170px;">
+                <strong>Tiba</strong>
+              </a>
+              <a class="control" style="width: 120px;">
+                <strong>Transit</strong>
+              </a>
+              <a class="control" style="width: 160px;">
+                <strong>Fasilitas</strong>
+              </a>
+              <a class="control" style="width: 190px;">
+                <strong>Harga</strong>
+              </a>
             </div>
           </nav>
 
@@ -483,7 +492,6 @@
                   <th></th>
                   <th>
                     <button class="button is-danger" @click="">
-                      <span class="icon"><i class="fa fa-money"></i></span>
                       <span>Checkout</span>
                     </button>
                   </th>
@@ -495,19 +503,31 @@
                   <th></th>
                   <th></th>
                   <th></th>
-                  <th></th>
-                  <th>{{ toCurrency(computeTotal()) }}</th>
+                  <th>Grand Total</th>
+                  <th>{{ toCurrency(grandTotal) }}</th>
                 </tr>
               </tfoot>
 
               <tbody>
                 <tr v-for="ticket in cart.pesawat">
                   <td>
-                    <img v-bind:src="ticket.img" alt="">
-                    {{ ticket.airlines }}
+                    <div class="">
+                      <img v-bind:src="ticket.img" alt="">
+                      <p style="font-size: 14px;">{{ ticket.airlines }}</p>
+                    </div>
                   </td>
-                  <td>{{ cityFull[ticket.cityd] }}<br>{{ cityFull[ticket.citya] }}</td>
-                  <td>{{ ticket.depart }}<br>{{ ticket.arrival }}</td>
+                  <td>
+                    <div class="">
+                      <p>{{ cityFull[ticket.cityd] }}</p>
+                      <p>{{ cityFull[ticket.citya] }}</p>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="">
+                      <p>p: {{ ticket.depart }}</p>
+                      <p>t: {{ nowHHNN(ticket.arrival) }}</p>
+                    </div>
+                  </td>
                   <td>
                     Total {{ Number(ticket.adult)+Number(ticket.child) }}
                     <br>
