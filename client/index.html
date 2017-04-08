@@ -3,16 +3,18 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <script src="assets/dist/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="assets/dist/sweetalert.css">
+    <script src="asset/javascript/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="asset/css/sweetalert.css">
     <script src="https://unpkg.com/vue"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
+
     <div id="searchpage">
 
       <section class="hero is-info is-medium is-bold">
@@ -32,8 +34,8 @@
                 <span></span>
               </span>
               <div class="nav-right nav-menu">
-                <a class="nav-item is-active">
-                  Home
+                <a class="nav-item is-active" @click="logout">
+                  Logout
                 </a>
                 <span class="nav-item">
                   <a class="button is-info is-inverted" @click="showCart">
@@ -491,7 +493,7 @@
                   <th></th>
                   <th></th>
                   <th>
-                    <button class="button is-danger" @click="">
+                    <button class="button is-danger" @click="checkout">
                       <span>Checkout</span>
                     </button>
                   </th>
@@ -545,7 +547,7 @@
         <button class="modal-close" @click="closeCart"></button>
       </div>
 
-    </div>
+    </div> <!-- NOTE: searchpage -->
 
     <footer class="footer">
       <div class="container">
@@ -557,6 +559,6 @@
       </div>
     </footer>
 
-    <script src="assets/js/bundle.js" charset="utf-8"></script>
+    <script src="asset/javascript/bundle.js" charset="utf-8"></script>
   </body>
 </html>

@@ -1,24 +1,36 @@
 const express = require('express'),
-      Transaction = require('../controllers/transactionController'),
-      helpers = require('../helpers/email');
-
+      Transaction = require('../models/transaction'),
+      helpers = require('../helpers/email'),
+      jwt = require('jsonwebtoken'),
+      mail = require('../helpers/email')
 
 let methods = {}
   methods.create = (req, res) => {
-    Transaction.create ({
-      // jenis_tiket : req.body.jenis_tiket,
-      // jumlah_tiket : req.body.jumlah_tiket,
-      // jumlah_orang  : req.body.jumlah_orang,
-      // departOrCheckIn : req.body.departOrCheckIn,
-      // arrivalOrCheckOut : req.body.arrivalOrCheckOut
-    })
-    .then(function (err, data) {
-      if(err){
-        res.send(err)
-      }else {
-        res.json(data)
+
+    jwt.verify(req.body.token, 'rahasia', function(err, decoded) {
+      if (err) {
+
+      } else {
+        let data = {
+          userId : decoded._doc._id,
+          tanggalPemesanan : req.body.tanggalPemesanan,
+          tickets: req.body.tickets,
+          email : decoded._doc.email
+        }
+        Transaction.create(data)
+          .then(function (err, data) {
+            if(err){
+              res.send(err)
+            }else {
+              console.log(1)
+              //mail.getEmail({email : data.email},account)
+              res.json({ success: true })
+            }
+          })
+
       }
     })
+
   }
   methods.getAll = (req, res) => {
     Transaction.find()

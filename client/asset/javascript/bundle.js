@@ -7,6 +7,8 @@ $('#ticketSearch').css('display', '');
 var searchpage = new Vue({
   el: '#searchpage',
   data: {
+    name : '',
+    token : '',
     cityFull: {
       'MNA': 'Sulawesi Utara (MNA), Melanguane',
       'TXE': 'Aceh (TXE), Takengon Rembele',
@@ -389,6 +391,9 @@ var searchpage = new Vue({
     showCart: function() {
       let self = this
       self.computeTotal()
+      let storedCart = JSON.parse(localStorage.getItem("cart"))
+      self.cart.pesawat = storedCart
+      console.log(self.cart)
       $('#ticketCart').addClass('is-active')
     },
 
@@ -427,14 +432,76 @@ var searchpage = new Vue({
     },
 
     checkout: function() {
-      // let storedCart = JSON.parse(localStorage.getItem("cart"))
+      let self = this
+      let storedCart = JSON.parse(localStorage.getItem("cart"))
+      let token = localStorage.getItem("authToken")
+      let data = {
+        token: token,
+        tanggalPemesanan: new Date,
+        tickets: []
+      }
+
+      if (storedCart == null) {
+        swal({
+            title: "Oops!",
+            text: 'Silahkan memesan tiket terlebih dahulu',
+            type: "error",
+            confirmButtonText: "OK Saya paham"
+          });
+      } else {
+
+        storedCart.forEach(val => {
+          let ticket = {
+              jenis_tiket : 'pesawat',
+              jumlah_tiket : Number(val.adult) + Number(val.child),
+              jumlah_orang : Number(val.adult) + Number(val.child),
+              departOrCheckIn : val.depart,
+              arrivalOrCheckOut : val.arrival
+            }
+            console.log(ticket)
+          data.tickets.push(ticket)
+        })
+
+        axios.post('http://localhost:3000/transaction', data)
+          .then(function (response) {
+            swal("Terima kasih", "Silahkan melakukan cek email Anda untuk melakukan pembayaran", "success")
+            localStorage.removeItem('cart')
+            self.closeCart()
+          })
+          .catch(function (error) {
+            swal("Maaf terjadi kesalahan error", "Hubungi tim TIKETIN.com")
+          })
+      }
+
+    },
+
+    logout : function(){
+      localStorage.clear()
+      window.location="http://localhost:8080/login.html";
+    },
+    checkAuth : function(){
+      console.log('oke oce');
+     if (localStorage.getItem("authToken") === null) {
+        swal({
+            title: "Error!",
+            text: 'Maaf Kamu sebelumnya harus login terlebih dahulu',
+            type: "error",
+            confirmButtonText: "OK Saya paham"
+          });
+          setTimeout(function(){
+            window.location="http://localhost:8080/login.html";
+          }, 4000);
+
+      }
     }
+
 
   },
   mounted: function() {
+    this.checkAuth()
+
     this.flightSearch.date = this.nowYYMMDD
-    localStorage.clear()
-    let storedCart = JSON.parse(localStorage.getItem("cart"))
+    // localStorage.removeItem('cart')
   }
 })
 },{"./cheerio":2}],2:[function(require,module,exports){

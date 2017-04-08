@@ -4,7 +4,7 @@ const Mongoose = require('mongoose')
 const Schema = Mongoose.Schema
 
 let schemaTransaction = new Schema({
-  userId : [{type : Schema.Types.ObjectId, ref : 'User'}],
+  userId : {type : Schema.Types.ObjectId, ref : 'User'},
   tanggalPemesanan : String,
   tickets : [
               {
@@ -17,6 +17,6 @@ let schemaTransaction = new Schema({
             ]
 })
 
-let Transaction = Mongoose.model('Transaction', schemaUsers)
+let Transaction = Mongoose.model('Transaction', schemaTransaction)
 
-module.exports = User
+module.exports = Transaction

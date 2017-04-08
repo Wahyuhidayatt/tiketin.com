@@ -28,7 +28,7 @@
           if (response.data.success){
               swal("Login Success", "Selamat datang di TIKETin ", "success")
               localStorage.setItem("authToken", response.data.token);
-               window.location="http://localhost:8080/dashboard.html";
+               window.location="http://localhost:8080/index.html";
           }else {
             swal({
                 title: "Error!",
@@ -64,7 +64,7 @@
               app.closeModalRegister()
               localStorage.setItem("authToken", response.data.token);
               setTimeout(function(){
-                window.location="http://localhost:8080/dashboard.html";
+                window.location="http://localhost:8080/index.html";
               }, 4000);
           }else {
             swal({
@@ -90,7 +90,7 @@
               confirmButtonText: "OK Saya paham"
             });
             setTimeout(function(){
-              window.location="http://localhost:8080/dashboard.html";
+              window.location="http://localhost:8080/index.html";
             }, 4000);
 
         }

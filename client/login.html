@@ -43,7 +43,7 @@
         <div class="field">
             <p class="control">
               <p class="subtitle">Password</p>
-              <input class="input" type="text" placeholder="Password" v-model='user.password'>
+              <input class="input" type="password" placeholder="Password" v-model='user.password'>
             </p>
         </div>
         <div class="field">
@@ -55,7 +55,7 @@
               <a class="button is-warning button-register" @click='showModalRegister'>
                 REGISTER
               </a>
-               <a class="button is-danger" @click='forgetAccount'>
+               <a class="button is-danger" @click='showForget'>
                  FORGET
                </a>
             </p>
@@ -71,6 +71,7 @@
           <h1 class="modal-card-title">Register</h1>
           <button class="delete"></button>
         </header>
+        router.get('/user', Controller.getAll)
         <section class="modal-card-body ">
           <!-- Content ... -->
           <div class="field">
@@ -94,7 +95,7 @@
           <div class="field">
               <p class="modal-card-title">Password</p>
               <p class="control">
-                <input class="input" type="text" placeholder="password" v-model='register.password'>
+                <input class="input" type="password" placeholder="password" v-model='register.password'>
               </p>
           </div>
         </section>

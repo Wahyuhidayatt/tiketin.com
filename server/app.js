@@ -52,7 +52,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.listen(3000)
 
 app.use('/api', users);
-app.use('/transaction', transactions)
+app.use('/api/transaction', transactions)
 
 
 

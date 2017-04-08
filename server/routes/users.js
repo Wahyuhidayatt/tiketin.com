@@ -29,7 +29,7 @@ router.post('/login',  function(req,res,next){
         })
       })(req,res,next)
 });
-
+router.get('/user', Controller.getAll)
 router.post('/forget',Controller.forget)
 
 module.exports = router;
